@@ -52,7 +52,6 @@ public class ChambreService implements IChambre{
 
             
         } catch (SQLException e) {
-            //TODO: handle exception
             e.printStackTrace();
         }
 

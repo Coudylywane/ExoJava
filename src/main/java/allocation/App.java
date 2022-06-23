@@ -8,19 +8,8 @@ import allocation.models.Pavillon;
 import allocation.services.ChambreService;
 import allocation.services.PavillonService;
 
-/**
- * Hello world!
- *
- */
+
 public class App {
-    /*
-     * public static void main( String[] args )
-     * {
-     * System.out.println( "Hello World!" );
-     * DB.getConnection();
-     * 
-     * }
-     */
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -41,6 +30,8 @@ public class App {
 
             switch (choix) {
                 case 1:
+                System.out.println("################ Menu Chambre #################");
+
                     do {
                         System.out.println("1-Ajouter");
                         System.out.println("2-Lister");
@@ -65,8 +56,18 @@ public class App {
                                 System.out.println("1-oui , 2-non");
                                 int choixPav = scanner.nextInt();
                                 if (choixPav == 1) {
-                                    System.out.println("saisir l'id du pavillon");
-                                    
+
+                                    System.out.println("################ Pavillon disponible #################");
+
+                                    List<Pavillon> pavillons = pavillonService.getAllPavillons();
+                                    for (Pavillon pavillo : pavillons) {
+                                        System.out.println("#################################");
+                                        System.out.println("ID : " + pavillo.getId());
+                                        System.out.println("Numero Chambre : " + pavillo.getNum());
+                                        System.out.println("Numero Etage : " + pavillo.getNbreEtage());
+
+                                    }
+                                    System.out.println("Entrer l'id du pavillon");
                                     idPavillon = scanner.nextInt();
                                     Pavillon pavillon = pavillonService.rechercherPavillon(idPavillon);
                                     if (pavillon == null) {
@@ -82,6 +83,7 @@ public class App {
                                 break;
 
                             case 2:
+                            System.out.println("################ Autres Chambre #################");
 
                                 do {
 
@@ -137,23 +139,22 @@ public class App {
                                             }
                                             break;
 
-                                        default:
-                                            System.out.println("Veillez faire un bon choix");
-                                            break;
+                                       
                                     }
 
-                                } while (choix2 != 3);
+                                }  while (choix2 != 3);
 
                                 break;
 
                             default:
-                                System.out.println("Veillez faire un bon choix");
                                 break;
                         }
-
                     } while (choix1 != 3);
+                    break;
 
                 case 2:
+                System.out.println("################ Menu Pavillon #################");
+
                     do {
                         System.out.println("1-Ajouter");
                         System.out.println("2-Lister");
@@ -176,12 +177,12 @@ public class App {
                                 break;
 
                             case 2:
+                            System.out.println("################ Autres Pavillon #################");
 
                                 do {
 
-                                    System.out.println("1-Supprimer");
-                                    System.out.println("2-Modifier");
-                                    System.out.println("3-Retour");
+                                    System.out.println("1-Modifier");
+                                    System.out.println("2-Retour");
 
                                     List<Pavillon> pavillons = pavillonService.getAllPavillons();
                                     for (Pavillon pavillo : pavillons) {
@@ -199,28 +200,16 @@ public class App {
                                     switch (choix2) {
                                         case 1:
                                             System.out.println("Entrer l'id du pavillon");
-                                            int id = scanner.nextInt();
-                                            pavillon = pavillonService.rechercherPavillon(id);
-                                            if (pavillons == null) {
-                                                System.out.println("Chambre inexistante");
-
-                                            } else {
-                                                pavillonService.deletePavillon(pavillon);
-                                            }
-                                            break;
-
-                                        case 2:
-                                            System.out.println("Entrer l'id du pavillon");
                                             int ids = scanner.nextInt();
                                             pavillon = pavillonService.rechercherPavillon(ids);
                                             if (pavillon == null) {
                                                 System.out.println("Chambre inexistante");
 
                                             } else {
-                                                System.out.println("Entrer le numero de la chambre");
+                                                System.out.println("Entrer le numero du paviilon");
                                                 pavillon.setNum(scanner.nextInt());
 
-                                                System.out.println("Entrer le numero de l'etage");
+                                                System.out.println("Entrer le nombre d'etage");
                                                 pavillon.setNbreEtage(scanner.nextInt());
 
                                                 pavillonService.modifierPavillon(pavillon);
@@ -228,28 +217,23 @@ public class App {
                                             break;
 
                                         default:
-                                            System.out.println("Veillez faire un bon choix");
                                             break;
                                     }
 
-                                } while (choix2 != 3);
+                                } while (choix2 != 2);
 
                                 break;
 
                             default:
-                                System.out.println("Veillez faire un bon choix");
                                 break;
                         }
 
                     } while (choix1 != 3);
                     break;
 
-                default:
-                    System.out.println("Veillez faire un bon choix");
-                    break;
+                
             }
         } while (choix != 3);
     }
 }
 
-/*  */

@@ -52,7 +52,6 @@ public class PavillonService implements IPavillon{
 
             
         } catch (SQLException e) {
-            //TODO: handle exception
             e.printStackTrace();
         }
 

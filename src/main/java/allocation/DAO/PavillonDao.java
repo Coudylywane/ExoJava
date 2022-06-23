@@ -39,7 +39,6 @@ public class PavillonDao {
 
             return true;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -61,7 +60,6 @@ public class PavillonDao {
 
             return true;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -82,7 +80,6 @@ public class PavillonDao {
 
             return true;
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
