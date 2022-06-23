@@ -1,8 +1,10 @@
 package allocation;
 
+import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 
+import allocation.DAO.DB;
 import allocation.models.Chambre;
 import allocation.models.Pavillon;
 import allocation.services.ChambreService;
@@ -12,9 +14,10 @@ import allocation.services.PavillonService;
 public class App {
 
     public static void main(String[] args) throws Exception {
+        Connection conn = DB.getConnection();
         Scanner scanner = new Scanner(System.in);
-        ChambreService chambreService = new ChambreService();
-        PavillonService pavillonService = new PavillonService();
+        ChambreService chambreService = new ChambreService(conn);
+        PavillonService pavillonService = new PavillonService(conn);
         int idPavillon;
         int choix;
         int choix1;
@@ -234,6 +237,8 @@ public class App {
                 
             }
         } while (choix != 3);
+        conn.close();
+        System.out.println("Au revoir!!!");
     }
 }
 

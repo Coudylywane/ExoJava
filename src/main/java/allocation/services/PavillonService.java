@@ -1,5 +1,6 @@
 package allocation.services;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,10 +14,12 @@ import allocation.models.Pavillon;
 public class PavillonService implements IPavillon{
 
 
-    PavillonDao pavillonDao = new PavillonDao();
+    PavillonDao pavillonDao;
     List<Pavillon> pavillons = new ArrayList<>();
 
-
+    public PavillonService(Connection con) {
+        pavillonDao = new PavillonDao(con);
+    }
 
     @Override
     public boolean addPavillon(Pavillon pavillon) {

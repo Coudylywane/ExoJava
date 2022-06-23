@@ -1,6 +1,7 @@
 package allocation.services;
 
 import java.sql.SQLException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,13 @@ import allocation.models.Chambre;
 import allocation.models.Pavillon;
 
 public class ChambreService implements IChambre{
-    ChambreDao chambreDao = new ChambreDao();
+
+    ChambreDao chambreDao;
     List<Chambre> chambres = new ArrayList<>();
 
+    public ChambreService(Connection conn) {
+        chambreDao = new ChambreDao(conn);
+    }
 
 
     @Override

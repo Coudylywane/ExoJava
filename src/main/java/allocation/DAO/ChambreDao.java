@@ -10,8 +10,16 @@ import allocation.models.Pavillon;
 
 public class ChambreDao {
 
+    private Connection con;
+
+    public ChambreDao(Connection conn) {
+        this.con = conn;
+    }
+
     public ResultSet getAllChambres() throws SQLException{
-        Connection con = DB.getConnection();
+        if (con == null) {
+            con = DB.getConnection();
+        }
         String query = "SELECT * FROM chambre";
         PreparedStatement statement = con.prepareStatement(query);
         ResultSet rs = statement.executeQuery();
@@ -19,17 +27,18 @@ public class ChambreDao {
     }
 
     public boolean addChambre(Chambre chambre) {
-        Connection conn = DB.getConnection();
+        if (con == null) {
+            con = DB.getConnection();
+        }
         String query = "INSERT INTO chambre(numCh,numEtage,etat) VALUES(?,?,?)";
         try {
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1, chambre.getNumCh());
             statement.setInt(2, chambre.getNumEtage());
             statement.setString(3, chambre.getEtat());
 
             statement.execute();
             statement.close();
-            conn.close();
 
             return true;
         } catch (SQLException e) {
@@ -41,10 +50,12 @@ public class ChambreDao {
 
 
     public boolean addChambre(Chambre chambre, Pavillon pavillon) {
-        Connection conn = DB.getConnection();
+        if (con == null) {
+            con = DB.getConnection();
+        }
         String query = "INSERT INTO chambre(numCh,numEtage,etat,id_pavillon) VALUES(?,?,?,?)";
         try {
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1, chambre.getNumCh());
             statement.setInt(2, chambre.getNumEtage());
             statement.setString(3, chambre.getEtat());
@@ -52,7 +63,6 @@ public class ChambreDao {
 
             statement.execute();
             statement.close();
-            conn.close();
 
             return true;
         } catch (SQLException e) {
@@ -63,10 +73,12 @@ public class ChambreDao {
     }
 
     public boolean modifChambre(Chambre chambre) {
-        Connection conn = DB.getConnection();
+        if (con == null) {
+            con = DB.getConnection();
+        }
         String query = "UPDATE chambre SET numCh=? , numEtage=? , etat=? WHERE id = ?";
         try {
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1, chambre.getNumCh());
             statement.setInt(2, chambre.getNumEtage());
             statement.setString(3, chambre.getEtat());
@@ -74,7 +86,6 @@ public class ChambreDao {
 
             statement.execute();
             statement.close();
-            conn.close();
 
             return true;
         } catch (SQLException e) {
@@ -86,15 +97,16 @@ public class ChambreDao {
 
 
     public boolean delChambre(Chambre chambre) {
-        Connection conn = DB.getConnection();
+        if (con == null) {
+            con = DB.getConnection();
+        }
         String query = "DELETE FROM chambre  WHERE chambre.id = ?";
         try {
-            PreparedStatement statement = conn.prepareStatement(query);
+            PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1, chambre.getId());
 
             statement.execute();
             statement.close();
-            conn.close();
 
             return true;
         } catch (SQLException e) {
