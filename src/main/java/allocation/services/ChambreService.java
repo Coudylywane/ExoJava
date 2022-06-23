@@ -8,6 +8,7 @@ import java.util.List;
 import allocation.DAO.ChambreDao;
 import allocation.interfaces.IChambre;
 import allocation.models.Chambre;
+import allocation.models.Pavillon;
 
 public class ChambreService implements IChambre{
     ChambreDao chambreDao = new ChambreDao();
@@ -22,10 +23,17 @@ public class ChambreService implements IChambre{
 
 
     @Override
+    public boolean addChambre(Chambre chambre, Pavillon pavillon) {
+        return chambreDao.addChambre(chambre,pavillon);
+    }
+
+
+
+
+    @Override
     public List<Chambre> getAllChambres() {
 
         try {
-
             ResultSet rs = chambreDao.getAllChambres();
             if (rs != null) {
 
@@ -76,5 +84,8 @@ public class ChambreService implements IChambre{
         return chambreDao.delChambre(chambre);
 
     }
+
+
+    
     
 }

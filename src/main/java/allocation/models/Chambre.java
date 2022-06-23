@@ -7,10 +7,19 @@ public class Chambre {
     private Integer numCh ;
     private Integer numEtage ;
     private String etat ;
+    private Pavillon pavillon ;
 
 
 
 
+   
+   
+    public Pavillon getPavillon() {
+        return pavillon;
+    }
+    public void setPavillon(Pavillon pavillon) {
+        this.pavillon = pavillon;
+    }
     public String getEtat() {
         return etat;
     }

@@ -60,5 +60,9 @@ public class Pavillon {
        
     }
 
+    public boolean add(Pavillon pavillon) {
+        return false;
+    }
+
    
 }

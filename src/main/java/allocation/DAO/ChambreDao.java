@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import allocation.models.Chambre;
+import allocation.models.Pavillon;
 
 public class ChambreDao {
 
@@ -25,6 +26,30 @@ public class ChambreDao {
             statement.setInt(1, chambre.getNumCh());
             statement.setInt(2, chambre.getNumEtage());
             statement.setString(3, chambre.getEtat());
+
+            statement.execute();
+            statement.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    public boolean addChambre(Chambre chambre, Pavillon pavillon) {
+        Connection conn = DB.getConnection();
+        String query = "INSERT INTO chambre(numCh,numEtage,etat,id_pavillon) VALUES(?,?,?,?)";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, chambre.getNumCh());
+            statement.setInt(2, chambre.getNumEtage());
+            statement.setString(3, chambre.getEtat());
+            statement.setInt(4, pavillon.getId());
 
             statement.execute();
             statement.close();
